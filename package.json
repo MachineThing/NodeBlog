@@ -1,0 +1,14 @@
+{
+  "name": "nodeblog",
+  "version": "1.0.0",
+  "description": "Blog made from the ground up using the http module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon ."
+  },
+  "devDependencies": {
+    "nodemon": "2.0"
+  },
+  "author": "Mason Fisher",
+  "license": "MIT"
+}
