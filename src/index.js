@@ -23,7 +23,7 @@ server.on('request', (req, res) => {
     } else {
         try {
             // In urls.js
-            text = require('./pages' + urlPage)();
+            text = require('./pages' + urlPage)(req, res);
             res.writeHead(200, { 'Content-Type': 'text/html' });
         } catch (err) {
             // Server error
