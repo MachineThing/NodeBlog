@@ -1,3 +1,4 @@
 module.exports  = {
-    '':'/index.js'
+    '':'/index.js',
+    'register':'/register.js'
 }
