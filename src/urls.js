@@ -1,4 +1,15 @@
+class Url {
+    constructor(path, name=undefined) {
+        this.path = '/'+path;
+        if (name === undefined) {
+            this.title = '';
+        } else {
+            this.title = ' - '+name;
+        }
+    }
+}
+
 module.exports  = {
-    '':'/index.js',
-    'register':'/register.js'
+    '':new Url('index.js'),
+    'register':new Url('register.js', 'Register')
 }

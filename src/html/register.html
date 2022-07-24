@@ -1,31 +1,23 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Node Blog - Register</title>
-        <link rel="stylesheet" href="/static/index.css">
-    </head>
-    <body>
-        <h1>Register!</h1>
-        <form action="/register" method="POST">
-            <table>
-                <tr>
-                    <td><label for="username">Username:</label></td>
-                    <td><input type="text" id="username" name="username"></td>
-                </tr>
-                <tr>
-                    <td><label for="email">Email:</label></td>
-                    <td><input type="email" id="email" name="email"></td>
-                </tr>
-                <tr>
-                    <td><label for="password1">Password:</label></td>
-                    <td><input type="password" id="password1" name="password1"></td>
-                </tr>
-                <tr>
-                    <td><label for="password2">Confirm password:</label></td>
-                    <td><input type="password" id="password2" name="password2"></td>
-                </tr>
-            </table>
-            <button type="submit">Register</button>
-        </form>
-    </body>
-</html>
+<h1>Register!</h1>
+<form action="/register" method="POST">
+    <table>
+        <tr>
+            <td><label for="username">Username:</label></td>
+            <td><input type="text" id="username" name="username"></td>
+        </tr>
+        <tr>
+            <td><label for="email">Email:</label></td>
+            <td><input type="email" id="email" name="email"></td>
+        </tr>
+        <tr>
+            <td><label for="password1">Password:</label></td>
+            <td><input type="password" id="password1" name="password1"></td>
+        </tr>
+        <tr>
+            <td><label for="password2">Confirm password:</label></td>
+            <td><input type="password" id="password2" name="password2"></td>
+        </tr>
+    </table>
+    <button type="submit">Register</button>
+</form>
+<script src="/static/register_form.js"></script>
