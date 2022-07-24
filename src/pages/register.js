@@ -3,6 +3,11 @@ const { URLSearchParams } = require('url');
 
 module.exports = (req, res) => {
     return new Promise(function (resolve) {
+        // Checks
+        let password_matches    = true;
+        let vaild_username      = true;
+        let valid_email         = true;
+
         if (req.method === "POST") {
             var output = "";
     
@@ -12,7 +17,14 @@ module.exports = (req, res) => {
             
             req.on('end', function () {
                 const outParams = new URLSearchParams(output);
-                resolve(outParams.toString());
+                // Server-side form validation (if client-side doesn't work or is disabled)
+                // Check if the passwords match
+                password_matches = outParams.get('password1') === outParams.get('password2');
+                // Check if username is valid (alphabet, numbers, dashes and underscores only. 3 to 20 characters long)
+                vaild_username = /^[A-Za-z0-9-_]{3,20}$/.test(outParams.get('username'));
+                // Check if email matches (credit to: https://github.com/manishsaraan/email-validator/blob/master/index.js)
+                valid_email = /^[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/.test(outParams.get('email'));
+                resolve(`1: ${password_matches} 2: ${vaild_username} 3: ${valid_email}`);
             });
         } else {
             resolve(fs.readFileSync('./src/html/register.html'));
