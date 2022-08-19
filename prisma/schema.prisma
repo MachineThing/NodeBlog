@@ -14,7 +14,7 @@ model user {
     id          BigInt      @id @default(autoincrement()) // User's ID
     email       String                                    // User's email
     username    String      @db.VarChar(20)               // User's username
-    password    String      @db.Char(64)                  // User's password hash
+    password    String      @db.Char(128)                 // User's password hash
     joindate    DateTime    @default(now())               // Date and time the user joined
     lastdate    DateTime    @default(now())               // Date and time the user was last online
     admin       Boolean     @default(false)               // Is this user an administrator?

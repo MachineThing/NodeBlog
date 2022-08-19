@@ -5,15 +5,6 @@ const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
-async function addUser(name, email, password) {
-    const user = await prisma.user.create({data: {
-        username: name,
-        email: email,
-        password: password
-    }});
-    console.log(user);
-}
-
 module.exports = (req, res) => {
     return new Promise(function (render) {
         // Checks
@@ -34,7 +25,7 @@ module.exports = (req, res) => {
                 output += chunk;
             });
             
-            req.on('end', function () {
+            req.on('end', () => {
                 const outParams = new URLSearchParams(output);
                 // Get input
                 input_password   = outParams.get('password1');
@@ -55,26 +46,25 @@ module.exports = (req, res) => {
                 } else {
                     // Salt and get hash
                     let salt = crypto.randomBytes(16);                                  // Generate a 16 byte (128 bit [16*8]) salt
-                    let user_password = `${salt}${input_password}`                      // Append salt to password
+                    let user_password = `${salt.toString('hex')}${input_password}`      // Append salt to password
                     let hash = crypto.createHash('sha3-384').update(user_password);     // Hash salted password
                     let salted_hash = `${salt.toString('hex')}${hash.digest('hex')}`;   // Append salt to hash
-                    
-                    // Turn salt into bytes
-                    const byte_array = [];
-                    for (let i = 0; i < salted_hash.length; i+=2) {
-                        let hex_byte = String.fromCharCode(`0x${salted_hash.slice(i, i+2)}`);
-                        byte_array.push(hex_byte);
-                    }
-                    const hash_string = byte_array.join("");
 
                     // Put in database
-                    addUser(input_username, input_email, hash_string).then(async () => {
-                        await prisma.$disconnect();
-                        render("Success!");
-                    }).catch(async (err) => {
-                        console.error(err);
-                        await prisma.$disconnect();
-                        render(`Database error: ${err}`);
+                    prisma.$connect().then(async () => {
+                        try {
+                            const user = await prisma.user.create({data: {
+                                username: input_username,
+                                email: input_email,
+                                password: salted_hash
+                            }});
+                            await prisma.$disconnect();
+                            render("Success!");
+                        } catch (err) {
+                            console.error(err);
+                            await prisma.$disconnect();
+                            render(`Database error: ${err}`);
+                        }
                     });
                 }
             });

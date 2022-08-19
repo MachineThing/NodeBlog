@@ -1,0 +1,1 @@
+ALTER TABLE `user` MODIFY `password` CHAR(128) NOT NULL;

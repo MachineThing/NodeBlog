@@ -11,5 +11,6 @@ class Url {
 
 module.exports  = {
     '':new Url('index.js'),
-    'register':new Url('register.js', 'Register')
+    'register':new Url('register.js', 'Register'),
+    'login':new Url('login.js', 'Login')
 }
