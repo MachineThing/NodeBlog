@@ -29,7 +29,7 @@ server.on('request', (req, res) => {
         try {
             // In urls.js
             require('./pages' + urlPage.path)(req, res).then(
-                // Success
+                // Render
                 function (output) {
                     res.writeHead(200, { 'Content-Type': 'text/html' });
                     res.end(compilePage(output, urlPage.title));

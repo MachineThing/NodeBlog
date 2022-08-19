@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 module.exports = (req, res) => {
-    return new Promise(function (resolve) {
-        resolve(fs.readFileSync('./src/html/index.html'));
+    return new Promise(function (render) {
+        render(fs.readFileSync('./src/html/index.html'));
     });
 }

@@ -4,15 +4,19 @@
   "description": "Blog made from the ground up using the http module",
   "main": "src/index.js",
   "scripts": {
-    "start": "nodemon ."
-  },
-  "devDependencies": {
-    "nodemon": "2.0"
+    "start": "nodemon .",
+    "migrate": "prisma migrate dev"
   },
   "author": "Mason Fisher",
   "license": "MIT",
   "dependencies": {
+    "@prisma/client": "^4.2.1",
+    "dotenv": "^16.0.1",
     "handlebars": "^4.7.7",
     "mime": "^3.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "2.0",
+    "prisma": "^4.2.1"
   }
 }
